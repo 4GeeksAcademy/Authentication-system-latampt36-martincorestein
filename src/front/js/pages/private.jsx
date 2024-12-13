@@ -89,7 +89,7 @@ export function Private() {
                             <button
                                 className="btn btn-warning fw-bold"
                                 onClick={() =>  {
-                                    const userConfirmed = window.confirm(`Are you sure you want to logout, ${user.username || "user"}?`);
+                                    const userConfirmed = window.confirm(`Are you sure you want to Logout, ${user.username || "user"}?`);
                                     if (userConfirmed) {
                                         actions.logout();
                                         navigate("/login");
