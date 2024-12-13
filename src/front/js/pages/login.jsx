@@ -44,7 +44,9 @@ export function Login() {
             const data = await response.json();
             // console.log("Inicio de sesión exitoso:", data);
 
-            actions.setToken(data.token); 
+            const username = data.username || userEmailOrUsername;
+            
+            actions.setToken(data.token, username); 
             if (isMounted.current) navigate("/private");
         } catch (error) {
             console.error("Error en el fetch:", error);

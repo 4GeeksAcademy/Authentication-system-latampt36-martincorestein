@@ -7,9 +7,11 @@ export const Navbar = () => {
     const navigate = useNavigate();
 
     const handleLogout = () => {
-        actions.logout(); 
-        alert("You have been logged out.");
-        navigate("/login"); 
+        const userConfirmed = window.confirm(`Are you sure you want to logout, ${store.username || "user"}?`);
+        if (userConfirmed) {
+            actions.logout();
+            navigate("/login");
+        }
     };
 
     return (

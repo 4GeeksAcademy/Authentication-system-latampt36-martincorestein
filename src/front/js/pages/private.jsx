@@ -1,7 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { Context } from "../store/appContext";
 
 export function Private() {
+    const {actions } = useContext(Context);
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -86,9 +88,12 @@ export function Private() {
                         <div className="text-center">
                             <button
                                 className="btn btn-warning fw-bold"
-                                onClick={() => {
-                                    localStorage.removeItem("token");
-                                    navigate("/login");
+                                onClick={() =>  {
+                                    const userConfirmed = window.confirm(`Are you sure you want to logout, ${user.username || "user"}?`);
+                                    if (userConfirmed) {
+                                        actions.logout();
+                                        navigate("/login");
+                                    }
                                 }}
                             >
                                 Logout

@@ -1,16 +1,19 @@
-const getState = ({ getStore,getActions, setStore }) => {
+const getState = ({ getStore, getActions, setStore }) => {
     return {
         store: {
             token: localStorage.getItem("token") || null, 
+            username: localStorage.getItem("username") || null, 
         },
         actions: {
-            setToken: (newToken) => {
+            setToken: (newToken, username) => {
                 localStorage.setItem("token", newToken); 
-                setStore({ token: newToken }); 
+                localStorage.setItem("username", username); 
+                setStore({ token: newToken, username: username }); 
             },
             logout: () => {
+                setStore({ token: null, username: null });
                 localStorage.removeItem("token"); 
-                setStore({ token: null }); 
+                localStorage.removeItem("username");
             },
         },
     };
