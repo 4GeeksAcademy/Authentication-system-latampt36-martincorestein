@@ -7,7 +7,10 @@ export const Navbar = () => {
     const navigate = useNavigate();
 
     const handleLogout = () => {
-        const userConfirmed = window.confirm(`Are you sure you want to Logout, ${store.username || "user"}?`);
+        const userConfirmed = window.confirm(
+            `Are you sure you want to Logout, ${store.username || "user"}?`
+
+        );
         if (userConfirmed) {
             actions.logout();
             navigate("/login");

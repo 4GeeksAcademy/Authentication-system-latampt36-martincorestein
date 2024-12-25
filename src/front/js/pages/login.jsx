@@ -10,6 +10,8 @@ export function Login() {
     const navigate = useNavigate();
     const isMounted = useRef(true);
 
+    const backend=process.env.BACKEND_URL
+
     React.useEffect(() => {
         isMounted.current = true;
         return () => {
@@ -21,7 +23,7 @@ export function Login() {
         setLoading(true);
         try {
             const response = await fetch(
-                "https://curly-capybara-5wp69779qr27xvp-3001.app.github.dev/api/login",
+                backend+"/api/login",
                 {
                     method: "POST",
                     body: JSON.stringify({
@@ -46,7 +48,13 @@ export function Login() {
 
             const username = data.username || userEmailOrUsername;
             
-            actions.setToken(data.token, username); 
+            if (data.token) {
+                actions.setToken(data.token, username);
+                navigate("/private");
+            } else {
+                console.error("Error: Token not received");
+            }
+            
             if (isMounted.current) navigate("/private");
         } catch (error) {
             console.error("Error en el fetch:", error);

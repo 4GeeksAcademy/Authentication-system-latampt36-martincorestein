@@ -13,13 +13,15 @@ export function SignUp() {
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
 
+    const backend=process.env.BACKEND_URL
+
     const signUp = async (email, password, username, name, birthdate, country) => {
         setLoading(true);
         try {
 
             const formattedBirthdate = birthdate ? new Date(birthdate).toLocaleDateString('en-GB') : null;
 
-            const response = await fetch('https://curly-capybara-5wp69779qr27xvp-3001.app.github.dev/api/signup', {
+            const response = await fetch(backend+'/api/signup', {
                 method: "POST",
                 body: JSON.stringify({
                     email,

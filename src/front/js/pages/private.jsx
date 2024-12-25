@@ -9,6 +9,8 @@ export function Private() {
     const [error, setError] = useState(null);
     const navigate = useNavigate();
 
+    const backend=process.env.BACKEND_URL
+
     useEffect(() => {
         const fetchUserData = async () => {
             
@@ -21,7 +23,7 @@ export function Private() {
             }
 
             try {
-                const response = await fetch("https://curly-capybara-5wp69779qr27xvp-3001.app.github.dev/api/users", {
+                const response = await fetch(backend+"/api/users", {
                     method: "GET",
                     headers: {
                         "Content-Type": "application/json",

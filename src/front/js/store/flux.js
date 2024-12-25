@@ -5,7 +5,7 @@ const getState = ({ getStore, getActions, setStore }) => {
             username: localStorage.getItem("username") || null, 
         },
         actions: {
-            setToken: (newToken, username) => {
+            setToken: (newToken, username = "Guest") => {
                 localStorage.setItem("token", newToken); 
                 localStorage.setItem("username", username); 
                 setStore({ token: newToken, username: username }); 
